@@ -42,7 +42,7 @@ if jmeno in uzivatel.keys() and heslo in str(uzivatel.values()):
          f"We have {len(TEXTS)} to be analyzed.\n{carky}")
     
     try:
-        vyber = int(input("Zadej číslo od 1 do 3: "))
+        vyber = int(input("Enter a number btw. 1 and 3 to select: "))
         if vyber not in range(1, 4):
            print("You should choose a number between 1 and 3, terminating the program.")
            exit()
