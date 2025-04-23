@@ -5,7 +5,7 @@ author: Jakub Heidlberk
 email: jakub.heidlberk@seznam.cz
 """
 TEXTS = [
-    '''Situated about 10 miles west of Kemmerer,
+'''Situated about 10 miles west of Kemmerer,
     Fossil Butte is a ruggedly impressive
     topographic feature that rises sharply
     some 1000 feet above Twin Creek Valley
@@ -29,9 +29,11 @@ TEXTS = [
     represent several varieties of perch, as well as
     other freshwater genera and herring similar to those
     in modern oceans. Other fish such as paddlefish,
-    garpike and stingray are also present.'''
-]
+    garpike and stingray are also present.''']
+    
 uzivatel = {"bob":123,"ann":"pass123","mike":"password123","liz":"pass123" }
+
+import string
 
 jmeno = input("Zadejte své uživatelské jméno: ")
 heslo = input("Zadejte své heslo: ")
@@ -49,7 +51,7 @@ if jmeno in uzivatel.keys() and heslo in str(uzivatel.values()):
     except ValueError:
         print("Invalid input, terminating the program.")
         exit()
-        
+
     print(f"{carky}")
 
     stat = {}
@@ -62,12 +64,13 @@ if jmeno in uzivatel.keys() and heslo in str(uzivatel.values()):
         stat["lower"] = sum(word.islower() for word in TEXTS[vyber - 1].split())
         stat["num_str"] = sum(word.isdigit() for word in TEXTS[vyber - 1].split())
         stat["sumec"] = sum(int(word) for word in TEXTS[vyber - 1].split() if word.isdigit())
-    
+
     for word in TEXTS[vyber - 1].split():
-        if len(word) in graf.keys():
-            graf[len(word)] += 1
+        word_clean = word.strip(string.punctuation)
+        if len(word_clean) in graf:
+            graf[len(word_clean)] += 1
         else:
-            graf[len(word)] = 1
+            graf[len(word_clean)] = 1
 
     graf = dict(sorted(graf.items()))
 
