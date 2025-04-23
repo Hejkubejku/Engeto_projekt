@@ -41,11 +41,15 @@ if jmeno in uzivatel.keys() and heslo in str(uzivatel.values()):
     print(f"username: {jmeno}\npassword: {heslo}\n{carky}\nWelcome to the app, {jmeno}.\n"
          f"We have {len(TEXTS)} to be analyzed.\n{carky}")
     
-    vyber = int(input("Enter a number btw. 1 and 3 to select: "))
-
-    if vyber not in range(1, 4) or vyber.isalpha(): # jen pro kontrolu, aby se nevypsal error
-        print(f"Invalid input, terminating the program.")
+    try:
+        vyber = int(input("Zadej číslo od 1 do 3: "))
+        if vyber not in range(1, 4):
+           print("You should choose a number between 1 and 3, terminating the program.")
+           exit()
+    except ValueError:
+        print("Invalid input, terminating the program.")
         exit()
+        
     print(f"{carky}")
 
     stat = {}
