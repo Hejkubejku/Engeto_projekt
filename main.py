@@ -31,48 +31,48 @@ TEXTS = [
     in modern oceans. Other fish such as paddlefish,
     garpike and stingray are also present.''']
     
-uzivatel = {"bob":123,"ann":"pass123","mike":"password123","liz":"pass123" }
+users = {"bob":123,"ann":"pass123","mike":"password123","liz":"pass123" }
 
 import string
 
-jmeno = input("Zadejte své uživatelské jméno: ")
-heslo = input("Zadejte své heslo: ")
-carky = "-" * 41
+name = input("Enter your name: ")
+password = input("Enter your password: ")
+commas = "-" * 41
 
-if jmeno in uzivatel.keys() and heslo in str(uzivatel.values()):
-    print(f"username: {jmeno}\npassword: {heslo}\n{carky}\nWelcome to the app, {jmeno}.\n"
-         f"We have {len(TEXTS)} to be analyzed.\n{carky}")
+if name in users.keys() and password in str(users.values()):
+    print(f"username: {name}\npassword: {password}\n{commas}\nWelcome to the app, {name}.\n"
+         f"We have {len(TEXTS)} to be analyzed.\n{commas}")
     
     try:
-        vyber = int(input("Enter a number btw. 1 and 3 to select: "))
-        if vyber not in range(1, 4):
+        selection = int(input("Enter a number btw. 1 and 3 to select: "))
+        if selection not in range(1, 4):
            print("You should choose a number between 1 and 3, terminating the program.")
            exit()
     except ValueError:
         print("Invalid input, terminating the program.")
         exit()
 
-    print(f"{carky}")
+    print(f"{commas}")
 
     stat = {}
-    graf = {}
+    graph = {}
 
-    if vyber:
-        stat["total"] =  len(TEXTS[vyber - 1].split())
-        stat["title"] = sum(word.istitle() for word in TEXTS[vyber - 1].split())
-        stat["upper"] = sum(word.isupper() for word in TEXTS[vyber - 1].split())
-        stat["lower"] = sum(word.islower() for word in TEXTS[vyber - 1].split())
-        stat["num_str"] = sum(word.isdigit() for word in TEXTS[vyber - 1].split())
-        stat["sumec"] = sum(int(word) for word in TEXTS[vyber - 1].split() if word.isdigit())
+    if selection:
+        stat["total"] =  len(TEXTS[selection - 1].split())
+        stat["title"] = sum(word.istitle() for word in TEXTS[selection - 1].split())
+        stat["upper"] = sum(word.isupper() for word in TEXTS[selection - 1].split())
+        stat["lower"] = sum(word.islower() for word in TEXTS[selection - 1].split())
+        stat["num_str"] = sum(word.isdigit() for word in TEXTS[selection - 1].split())
+        stat["all"] = sum(int(word) for word in TEXTS[selection - 1].split() if word.isdigit())
 
-    for word in TEXTS[vyber - 1].split():
+    for word in TEXTS[selection - 1].split():
         word_clean = word.strip(string.punctuation)
-        if len(word_clean) in graf:
-            graf[len(word_clean)] += 1
+        if len(word_clean) in graph:
+            graph[len(word_clean)] += 1
         else:
-            graf[len(word_clean)] = 1
+            graph[len(word_clean)] = 1
 
-    graf = dict(sorted(graf.items()))
+    graph = dict(sorted(graph.items()))
 
     print(
         f"There are: {stat['total']} words in the selected text.\n"
@@ -80,20 +80,20 @@ if jmeno in uzivatel.keys() and heslo in str(uzivatel.values()):
         f"There are: {stat['upper']} uppercase words.\n"
         f"There are: {stat['lower']} lowercase words.\n"
         f"There are: {stat['num_str']} numeric strings.\n"
-        f"The sum of all the numbers is {stat['sumec']}.\n"
-        f"{carky}"
+        f"The sum of all the numbers is {stat['all']}.\n"
+        f"{commas}"
     )
 
-    print(f"LEN|{' '}OCCURENCES{' ' * 3}|NR.\n{carky}")
+    print(f"LEN|{' '}OCCURENCES{' ' * 3}|NR.\n{commas}")
 
-    max_key_len = max(len(str(key)) for key in graf)
-    max_val_len = max(len(str(val)) for val in graf.values())
-    max_bar_len = max(graf.values())
+    max_key_len = max(len(str(key)) for key in graph)
+    max_val_len = max(len(str(val)) for val in graph.values())
+    max_bar_len = max(graph.values())
 
-    for key, value in graf.items():
+    for key, value in graph.items():
         bar = '*' * value
-        odstup = ' ' * (max_bar_len - value + 1)
-        print(f"{str(key).rjust(max_key_len)} | {bar}{odstup} |{str(value).rjust(max_val_len)}")
+        distance = ' ' * (max_bar_len - value + 1)
+        print(f"{str(key).rjust(max_key_len)} | {bar}{distance} |{str(value).rjust(max_val_len)}")
 else:
-    print(f"username: {jmeno}\npassword: {heslo}\nUnregistered user, terminating the program.")
+    print(f"username: {name}\npassword: {password}\nUnregistered user, terminating the program.")
     exit()
