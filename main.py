@@ -39,7 +39,7 @@ name = input("Enter your name: ")
 password = input("Enter your password: ")
 commas = "-" * 41
 
-if name in users.keys() and password in str(users.values()):
+if name in users and users[name] == password:
     print(f"username: {name}\npassword: {password}\n{commas}\nWelcome to the app, {name}.\n"
          f"We have {len(TEXTS)} to be analyzed.\n{commas}")
     
